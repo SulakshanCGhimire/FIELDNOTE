@@ -9,7 +9,7 @@
 | Open blockers | None |
 | Next milestone | Component model and navigation skeleton |
 
-## Day 1: Environment and project scaffold (2026-10-03)
+## Day 1: Environment and project scaffold
 
 **Objectives**
 - Set up the toolchain, create the Compose project, establish the repository, record initial decisions.
@@ -40,5 +40,30 @@
 - Verify and record the first commit.
 - Complete end-of-day review.
 
+## Day 2: Components and navigation 
+
+**Objectives**
+- Understand the Activity lifecycle, design navigation, and implement a placeholder navigation flow.
+
+**Completed**
+- Added Navigation Compose via the version catalog.
+- Implemented routes `reports`, `report/{id}`, `editor?id={id}` with placeholder screens in `ui/navigation`.
+- `MainActivity` hosts `FieldNoteNavHost`.
+- ADR 0003 (single-activity navigation) written.
+
+**Decisions**
+- Single Activity with navigation graph; ID-only arguments; one editor route with an optional ID.
+- Back with unsaved changes: confirmation dialog now, auto-saved drafts later (Day 8).
+
+**Concepts covered**
+- Lifecycle callbacks, Home vs Back, configuration change vs process death, back stack, version catalog vs compatibility.
+
+**Verification**
+- Manual on device: build and launch OK; back-stack behavior matched predictions.
+- Untested: rotation on the editor screen, emulator. Automated tests: none.
+
+**Needs revision**
+- Which lifecycle callbacks are guaranteed (`onPause`/`onStop`); catalog centralizes versions but does not guarantee compatibility.
+
 **Next**
-- Day 2: Activities, intents, manifest, and a minimal list/detail/editor navigation flow.
+- Day 3: Kotlin essentials, report data model and UI state.
