@@ -25,4 +25,17 @@ class LocationTest {
             Location(latitude = 10.0, longitude = 10.0, accuracyMeters = -1.0)
         }
     }
+
+    @Test
+    fun latitudeAt90_isAccepted() {
+        val location = Location(latitude = 90.0, longitude = 10.0)
+        assertEquals(90.0, location.latitude, 0.0)
+    }
+
+    @Test
+    fun longitudeAbove180_isRejected() {
+        assertThrows(IllegalArgumentException::class.java) {
+            Location(latitude = 10.0, longitude = 181.0)
+        }
+    }
 }
