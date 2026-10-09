@@ -65,7 +65,7 @@
 **Needs revision**
 - Which lifecycle callbacks are guaranteed (`onPause`/`onStop`); catalog centralizes versions but does not guarantee compatibility.
 
-## Day 3: Kotlin essentials and report model (2026-10-09)
+## Day 3: Kotlin essentials and report model
  
 **Objectives**
 - Revise the Kotlin features needed for data modeling; design and implement the report domain model.
