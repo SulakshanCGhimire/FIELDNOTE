@@ -65,5 +65,37 @@
 **Needs revision**
 - Which lifecycle callbacks are guaranteed (`onPause`/`onStop`); catalog centralizes versions but does not guarantee compatibility.
 
+## Day 3: Kotlin essentials and report model (2026-10-09)
+ 
+**Objectives**
+- Revise the Kotlin features needed for data modeling; design and implement the report domain model.
+
+**Completed**
+- Domain types in `domain/model`: `Priority`, `ReportStatus`, `Location` (self-validating), `Report` (immutable data class).
+- Core library desugaring enabled so `java.time.Instant` works on minSdk 24.
+- ADR 0004 (report domain model) written and accepted.
+- `LocationTest` written and extended to five tests.
+
+**Decisions**
+- `categoryId` as a string, not an enum.
+- `Instant` timestamps; `updatedAt` set in one place with an injectable clock (owning layer decided on Day 5).
+- Sync state kept out of the domain model.
+- Nullable `Location` in the model; persistence deferred.
+- `DRAFT` is a synchronized domain status; title validated at submission, not construction.
+- `version` and deletion marker deferred to the synchronization design.
+
+**Concepts covered**
+- Data classes, null safety, sealed types vs enums, coroutine basics, immutability with `copy()`, validation in `init`.
+
+**Verification**
+- `LocationTest`: 5 tests passed (valid coordinates, latitude at 90 accepted, latitude above 90 rejected, longitude above 180 rejected, negative accuracy rejected).
+- Failure proof: with the longitude check temporarily commented out, `longitudeAbove180_isRejected` failed (4 passed, 1 failed). After restoring the check, 5 passed.
+- Not tested: `Report` behavior, submission title validation, `updatedAt` handling, emulator.
+
+**Needs revision**
+- Where `updatedAt` is set (use case, repository or ViewModel).
+- Display rule for untitled drafts in the report list.
+- Draft visibility for collaborators (collaboration phase).
+
 **Next**
-- Day 3: Kotlin essentials, report data model and UI state.
+- Day 4: Android View system versus Jetpack Compose and Material 3; first report list, detail and editor screens.
